@@ -8,6 +8,7 @@ I wrote some integration tests, one for each operation.
 Api documentation is available through http://127.0.0.1:8080/banking/swagger-ui, you can also send test request from there.
 
 ##Project structure
+
 com.bis.banking.config - common configurations for project.
 
 com.bis.banking.converters - data converters between API, DB and service layers.
@@ -39,6 +40,7 @@ Better to use swagger, it is located on http://127.0.0.1:8080/banking/swagger-ui
 
 
 ###Creation of account
+
 Request:
 ```json
 curl -X POST "http://127.0.0.1:8080/banking/api/v1/accounts" -H "accept: application/json" -H "Content-Type: application/json" -d "{\"currency\":\"USD\",\"ownerName\":\"Some Name\"}"
@@ -52,6 +54,7 @@ Response:
 }
 ```
 ### Deletion of account(deactivation)
+
 Request:
 ```json
 curl -X DELETE "http://127.0.0.1:8080/banking/api/v1/accounts/AK2071450063" -H "accept: */*"
@@ -60,6 +63,7 @@ Response:
 ```json
 ```
 ### Cash deposit
+
 Request:
 ```json
 curl -X POST "http://127.0.0.1:8080/banking/api/v1/transactions" -H "accept: */*" -H "Content-Type: application/json" -d "{\"amount\":10000,\"currency\":\"USD\",\"targetAccountNumber\":\"BK868578765\",\"type\":\"CASH_DEPOSIT\"}"
@@ -68,6 +72,7 @@ Response:
 ```json
 ```
 ### Cash withdrawal
+
 Request:
 ```json
 curl -X POST "http://127.0.0.1:8080/banking/api/v1/transactions" -H "accept: */*" -H "Content-Type: application/json" -d "{\"amount\":10000,\"currency\":\"USD\",\"sourceAccountNumber\":\"BK868578765\",\"type\":\"CASH_WITHDRAWAL\"}"
@@ -76,6 +81,7 @@ Response:
 ```json
 ```
 ### Money transfer
+
 Request:
 ```json
 curl -X POST "http://127.0.0.1:8080/banking/api/v1/transactions" -H "accept: */*" -H "Content-Type: application/json" -d "{\"amount\":10000,\"currency\":\"USD\",\"sourceAccountNumber\":\"BK868578765\",\"targetAccountNumber\":\"AK2071450063\",\"type\":\"INTERNAL_TRANSFER\"}"```
@@ -83,6 +89,7 @@ Response:
 ```json
 ```
 ### International transfer
+
 Request:
 ```json
 curl -X POST "http://127.0.0.1:8080/banking/api/v1/transactions" -H "accept: */*" -H "Content-Type: application/json" -d "{\"amount\":1000,\"currency\":\"USD\",\"sourceAccountNumber\":\"BK868578765\",\"type\":\"EXTERNAL_TRANSFER\"}"
@@ -91,6 +98,7 @@ Response:
 ```json
 ```
 ### Getting the balance
+
 Request:
 ```json
 curl -X GET "http://127.0.0.1:8080/banking/api/v1/accounts/BK868578765" -H "accept: */*"
@@ -104,6 +112,7 @@ Response:
 }
 ```
 ###List of accounts
+
 Request:
 ```json
 curl -X GET "http://127.0.0.1:8080/banking/api/v1/accounts" -H "accept: */*"
@@ -123,7 +132,9 @@ Response:
 }
 ]
 ```
-### What can be improved
+
+### What can be improved in real application
+
 In 'real' life JUnit tests with good code coverage of business logic are required.
 Money exchange service is needed, as currently only transfers between accounts in the same currency are allowed.
 Exception handling and input validation(I've added a couple of checks, but not a proper handling).
